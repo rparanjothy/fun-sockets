@@ -10,13 +10,13 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   align-content: flex-start;
-  height: 90vh;
+  height: 70vh;
   overflow: auto;
 }
 
 .newMsgPod {
   position: relative;
-  width: 400px;
+  width: 350px;
   background-color: rgba(170, 36, 98, 0.336);
   min-height: 50px;
   display: flex;
@@ -40,7 +40,7 @@ body {
 
 .newMsg {
   position: relative;
-  width: 400px;
+  width: 350px;
   background-color: rgba(8, 28, 29, 0.836);
   min-height: 50px;
   display: flex;
