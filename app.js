@@ -20,9 +20,11 @@ expressServer.get("/", (req, res) =>
 
 socketServer.on("connection", (s) => {
   const msg = [s.id, "joined!"].join(" ");
-  log(msg);
-  s.emit("msg", "welcome !! " + s.id);
+  // log(msg);
+  // s.emit("msg", "welcome !! " + s.id);
+  s.emit("msg", "welcome !! ");
   socketServer.emit("msg", msg);
+  s.on("reply", (reply) => socketServer.emit("chat", reply));
 });
 
 httpServer.listen(5555, () => log("Server Started!!"));
