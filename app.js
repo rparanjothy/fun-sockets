@@ -30,7 +30,7 @@ const httpServer = http.createServer();
 
 const kafkaClient = new Kafka({
   clientId: "guid-ticker",
-  brokers: [kafkaBrokers],
+  brokers: kafkaBrokers.split(","),
 });
 
 const rdConsumer = kafkaClient.consumer({ groupId: "guid-chaser" });
