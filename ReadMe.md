@@ -8,7 +8,7 @@
 
 ### How to run?
 
-docker container run -it --rm --name guid-server -p9001:8080 -e RACEDAY_TOPIC=staging.timeseries.daqlog.raw -e UPSERT_URL=http://raceday-staging.sppo:30000/teams/upsert -e FETCH_URL=http://raceday-staging.sppo:30000/teams/listinfo -e KAFKA_BROKERS=raceday-staging.sppo:9092 sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
+docker container run -it --rm --name guid-server -p9001:8080 -e RACEDAY_TOPIC=staging.timeseries.daqlog.raw -e UPSERT_URL=http://raceday-staging.sppo:30000/teams/create -e FETCH_URL=http://raceday-staging.sppo:30000/teams/listinfo -e KAFKA_BROKERS=raceday-staging.sppo:9092 sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
 
 ### Container Envs to set
 

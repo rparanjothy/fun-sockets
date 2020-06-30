@@ -8,7 +8,8 @@ const error = (m) => console.error(m);
 const axios = require("axios");
 
 const racedayTopic =
-  process.env.RACEDAY_TOPIC || "staging.timeseries.merged-daqlog.raw";
+  process.env.RACEDAY_TOPIC ||
+  "staging.timeseries.merged-daqlog.raw,staging.unstructured.text.cooked";
 
 const upsertURL =
   process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/create";
@@ -34,39 +35,42 @@ const kafkaClient = new Kafka({
 
 const rdConsumer = kafkaClient.consumer({ groupId: "guid-chaser" });
 
-rdConsumer
-  .subscribe({ topic: racedayTopic })
-  .then(() => {
-    log(`${racedayTopic}: subscribe OK`);
-    rdConsumer.run({
-      eachMessage: async ({ topic, partition, message }) => {
-        const payload = JSON.parse(message.value.toString());
-        let incomingGuid;
+racedayTopic.split(",").forEach((tpic) => {
+  log(tpic);
+  rdConsumer
+    .subscribe({ topic: tpic })
+    .then(() => {
+      log(`[INFO] >>> ${tpic}: subscribe OK`);
+      rdConsumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+          const payload = JSON.parse(message.value.toString());
+          let incomingGuid;
 
-        if (topic.includes("unstructured")) {
-          incomingGuid = payload.guid;
-        } else {
-          incomingGuid = payload.iteration_guid;
-        }
+          if (topic.includes("unstructured")) {
+            incomingGuid = payload.guid;
+          } else {
+            incomingGuid = payload.iteration_guid;
+          }
 
-        incomingGuid &&
-          axios
-            .post(`${upsertURL}/${incomingGuid}`, {
-              crt_ts: Date.now(),
-              topic: topic,
-              guid: incomingGuid,
-            })
-            .then((res) => log(res.data))
-            .catch((ex) => {
-              const exRet = ex.response.data;
-              log(
-                `[ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
-              );
-            });
-      },
-    });
-  })
-  .catch((e) => log(`Error: ${e} - ${racedayTopic}`));
+          incomingGuid &&
+            axios
+              .post(`${upsertURL}/${incomingGuid}`, {
+                crt_ts: Date.now(),
+                topic: topic,
+                guid: incomingGuid,
+              })
+              .then((res) => log(res.data))
+              .catch((ex) => {
+                const exRet = ex.response.data;
+                log(
+                  `[ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
+                );
+              });
+        },
+      });
+    })
+    .catch((e) => log(`Error: ${e} - ${racedayTopic}`));
+});
 
 // wrap the websocker server on top of http server
 const webSocketServer = new webSocket.server({ httpServer: httpServer });
