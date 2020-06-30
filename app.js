@@ -7,7 +7,7 @@ const log = (m) => console.log(m);
 const axios = require("axios");
 
 const racedayTopic =
-  process.env.RACEDAY_TOPIC || "staging.timeseries.daqlog.raw";
+  process.env.RACEDAY_TOPIC || "staging.timeseries.merged-daqlog.raw";
 
 const upsertURL =
   process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/upsert";
@@ -40,21 +40,28 @@ rdConsumer
     rdConsumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         const payload = JSON.parse(message.value.toString());
+        let incomingGuid;
 
-        log(`Current: ${payload.iteration_guid}`);
-        axios
-          .post(`${upsertURL}/${payload.iteration_guid}`, {
-            crt_ts: Date.now(),
-            topic: topic,
-            guid: payload.iteration_guid,
-          })
-          .then((res) => res.data)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((ex) => {
-            console.log("Err" + ex);
-          });
+        if (topic.includes("unstructured")) {
+          incomingGuid = payload.guid;
+        } else {
+          incomingGuid = payload.iteration_guid;
+        }
+
+        incomingGuid &&
+          axios
+            .post(`${upsertURL}/${payload.guid}`, {
+              crt_ts: Date.now(),
+              topic: topic,
+              guid: incomingGuid,
+            })
+            .then((res) => res.data)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((ex) => {
+              console.log("Err" + ex);
+            });
       },
     });
   })

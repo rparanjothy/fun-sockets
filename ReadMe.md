@@ -6,6 +6,10 @@
 2. pushes an objet into Mongo upon reciept of a kafka message {guid,crt_ts,topic,\_id}
 3. Serves as a WebSocket Server and pushes latest 10 guids to clients every 2 seconds
 
+### How to run?
+
+docker container run -it --rm --name guid-server -p9001:8080 -e RACEDAY_TOPIC=staging.timeseries.daqlog.raw -e UPSERT_URL=http://raceday-staging.sppo:30000/teams/upsert -e FETCH_URL=http://raceday-staging.sppo:30000/teams/listinfo -e KAFKA_BROKERS=raceday-staging.sppo:9092 sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
+
 ### Container Envs to set
 
 RACEDAY_TOPIC = staging.timeseries.daqlog.raw
