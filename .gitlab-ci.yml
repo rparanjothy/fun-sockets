@@ -1,0 +1,52 @@
+stages:
+  - package
+  - prod
+
+variables:
+  APP_BUILD: /builds/$CI_PROJECT_PATH/build
+  DOCKER_IMAGE_NAME: "rparanjo/guid-ticker-api"
+  DOCKER_IMAGE_TAG: "${CI_REGISTRY}/${DOCKER_IMAGE_NAME}:${CI_BUILD_REF}"
+  DOCKER_MASTER_TAG: "${CI_REGISTRY}/${DOCKER_IMAGE_NAME}:latest"
+  # next two are for unsecure docker repo access
+  DOCKER_HOST: "tcp://builddocker:2375"
+  DOCKER_TLS_CERTDIR: ""
+
+services:
+  - name: chasehoffman/briefcaseglass:19.03.5-dind-test-proxy
+    alias: builddocker
+
+before_script:
+  - echo ${CI_REGISTRY_USER}  ${CI_REGISTRY} ${CI_BUILD_REF}
+  - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" ${CI_REGISTRY}
+  - docker info
+
+createDockerImage:
+  stage: package
+  image: docker:19.03.5
+  tags:
+    - docker
+    - linux
+  script:
+    - pwd
+    # - docker info
+    - docker build -t ${DOCKER_IMAGE_TAG} .
+    - docker images
+    - docker push ${DOCKER_IMAGE_TAG}
+
+  only:
+    - develop
+
+createDockerImageProd:
+  image: docker:19.03.5
+  stage: prod
+  tags:
+    - docker
+    - linux
+  only:
+    - master
+  when: manual
+  script:
+    - pwd
+    - docker build -t ${DOCKER_MASTER_TAG} -f ./Dockerfile .
+    - docker images
+    - docker push ${DOCKER_MASTER_TAG}
