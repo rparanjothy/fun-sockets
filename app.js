@@ -50,7 +50,7 @@ rdConsumer
 
         incomingGuid &&
           axios
-            .post(`${upsertURL}/${payload.guid}`, {
+            .post(`${upsertURL}/${incomingGuid}`, {
               crt_ts: Date.now(),
               topic: topic,
               guid: incomingGuid,
