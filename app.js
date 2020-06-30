@@ -3,6 +3,7 @@
 //  AMD, Austin, TX
 
 const log = (m) => console.log(m);
+const error = (m) => console.error(m);
 
 const axios = require("axios");
 
@@ -10,7 +11,7 @@ const racedayTopic =
   process.env.RACEDAY_TOPIC || "staging.timeseries.merged-daqlog.raw";
 
 const upsertURL =
-  process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/upsert";
+  process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/create";
 
 const fetchURL =
   process.env.FETCH_URL || "http://raceday-staging.sppo:30000/teams/listinfo";
@@ -31,7 +32,7 @@ const kafkaClient = new Kafka({
   brokers: [kafkaBrokers],
 });
 
-const rdConsumer = kafkaClient.consumer({ groupId: "scrutineer" });
+const rdConsumer = kafkaClient.consumer({ groupId: "guid-chaser" });
 
 rdConsumer
   .subscribe({ topic: racedayTopic })
@@ -55,12 +56,12 @@ rdConsumer
               topic: topic,
               guid: incomingGuid,
             })
-            .then((res) => res.data)
-            .then((res) => {
-              console.log(res);
-            })
+            .then((res) => log(res.data))
             .catch((ex) => {
-              console.log("Err" + ex);
+              const exRet = ex.response.data;
+              log(
+                `[ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
+              );
             });
       },
     });
