@@ -16,6 +16,8 @@ docker container run -it --rm \
  -e FETCH_URL=http://raceday-staging.sppo:30000/teams/listinfo \
  -e RETRIEVE_URL=http://raceday-staging.sppo:30000/teams/retrieve \
  -e KAFKA_BROKERS=raceday-staging.sppo:9092 \
+ -e FROMBEGIN=1 \
+ -e APPID=pdat-dashboard \
  sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
 
 ### Container Envs to set
@@ -29,6 +31,10 @@ FETCH_URL = http://raceday-staging.sppo:30000/teams/listinfo
 RETRIEVE_URL="http://raceday-staging.sppo:30000/teams/retrieve"
 
 KAFKA_BROKERS = raceday-staging.sppo:9092
+
+FROMBEGIN = 1/0
+
+APPID=pdat-dashboard
 
 ### Dependencies
 

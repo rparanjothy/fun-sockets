@@ -12,8 +12,15 @@ const racedayTopic =
   process.env.RACEDAY_TOPIC ||
   "staging.test.dgemm-tw.cooked,staging.test.hpl.cooked,staging.testseries.specrate2006fp.cooked,staging.testseries.specrate2006int.cooked,staging.testseries.specrate2017fp.cooked,staging.testseries.specrate2017int.cooked,staging.testseries.specspeed2006fp.cooked,staging.testseries.specspeed2006int.cooked,staging.testseries.specspeed2017fp.cooked,staging.testseries.specspeed2017int.cooked";
 
+const appID = process.env.APPID || "pdat-summary";
+
 const upsertURL =
   process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/create";
+
+const frmBeginningFlag = process.env.FROMBEGIN || 1;
+
+console.log(frmBeginningFlag);
+console.log(Boolean(parseInt(frmBeginningFlag)));
 
 const retrieveURL =
   process.env.RETRIEVE_URL ||
@@ -27,11 +34,11 @@ const kafkaBrokers = process.env.KAFKA_BROKERS || "raceday-staging.sppo:9092";
 const { Kafka } = require("kafkajs");
 
 const kafkaClient = new Kafka({
-  clientId: "pdat-summary",
+  clientId: appID,
   brokers: kafkaBrokers.split(","),
 });
 
-const rdConsumer = kafkaClient.consumer({ groupId: "pdat-summary" });
+const rdConsumer = kafkaClient.consumer({ groupId: appID });
 
 const sync = (iterGuid, incomingPayload, tpic, lbl) => {
   // const obj = fetchIterationObj(url);
@@ -40,7 +47,7 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
 
   const currentTopicObj = {};
 
-  log(incomingPayload);
+  // log(incomingPayload);
 
   currentTopicObj["data"] = incomingPayload;
   currentTopicObj["type"] = lbl;
@@ -48,7 +55,7 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
 
   const objUpdated = { ...currentTopicObj };
 
-  log(objUpdated);
+  // log(objUpdated);
 
   axios
     .post(`${upsertURL}/${iterGuid}`, objUpdated)
@@ -64,7 +71,10 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
 racedayTopic.split(",").forEach((tpic) => {
   log(tpic);
   rdConsumer
-    .subscribe({ topic: tpic })
+    .subscribe({
+      topic: tpic,
+      fromBeginning: Boolean(parseInt(frmBeginningFlag)),
+    })
     .then(() => {
       log(`[INFO] >>> ${tpic}: subscribe OK`);
       rdConsumer.run({
@@ -83,9 +93,9 @@ racedayTopic.split(",").forEach((tpic) => {
             sut_dimensions: sut_dimensionsFixed,
           };
 
-          log(tpic);
-          log(payloadRaw);
-          log(Object.keys(payloadRaw));
+          // log(tpic);
+          // log(payloadRaw);
+          // log(Object.keys(payloadRaw));
 
           if (Object.keys(payloadRaw).includes("dgemm_tw")) {
             log("DGEMM" + tpic);
