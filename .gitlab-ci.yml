@@ -1,6 +1,7 @@
 stages:
   - package
   - prod
+  - packageDash
 
 variables:
   APP_BUILD: /builds/$CI_PROJECT_PATH/build
@@ -37,21 +38,21 @@ createDockerImage:
   only:
     - develop
 
-  createDockerImageDashboard:
-    stage: package
-    image: docker:19.03.5
-    tags:
-      - docker
-      - linux
-    script:
-      - pwd
-      # - docker info
-      - docker build -t ${DOCKER_DASHBOARD_TAG} .
-      - docker images
-      - docker push ${DOCKER_DASHBOARD_TAG}
+createDockerImageDashboard:
+  stage: packageDash
+  image: docker:19.03.5
+  tags:
+    - docker
+    - linux
+  script:
+    - pwd
+    # - docker info
+    - docker build -t ${DOCKER_DASHBOARD_TAG} .
+    - docker images
+    - docker push ${DOCKER_DASHBOARD_TAG}
 
-    only:
-      - dashboard
+  only:
+    - dashboard
 
 createDockerImageProd:
   image: docker:19.03.5
