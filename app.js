@@ -57,15 +57,18 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
 
   // log(objUpdated);
 
-  axios
-    .post(`${upsertURL}/${iterGuid}`, objUpdated)
-    .then((res) => log(res.data))
-    .catch((ex) => {
-      const exRet = ex.response.data;
-      log(
-        `[ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
-      );
-    });
+  !iterGuid && log(`[ERROR] >>> GUID: ${iterGuid} >>> topic: ${tpic} `);
+
+  iterGuid &&
+    axios
+      .post(`${upsertURL}/${iterGuid}`, objUpdated)
+      .then((res) => log(`[SUCCESS] >>> GUID: ${iterGuid} >>> topic: ${tpic} `))
+      .catch((ex) => {
+        const exRet = ex.response.data;
+        log(
+          `[API ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
+        );
+      });
 };
 
 racedayTopic.split(",").forEach((tpic) => {
@@ -98,7 +101,7 @@ racedayTopic.split(",").forEach((tpic) => {
           // log(Object.keys(payloadRaw));
 
           if (Object.keys(payloadRaw).includes("dgemm_tw")) {
-            log("DGEMM" + tpic);
+            // log("DGEMM");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -123,8 +126,8 @@ racedayTopic.split(",").forEach((tpic) => {
               "DGEMM"
             );
           } else if (Object.keys(payloadRaw).includes("HPL")) {
-            log("hpl");
-            log();
+            // log("hpl");
+
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -148,7 +151,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "HPL"
             );
           } else if (Object.keys(payloadRaw).includes("SPECrate2006_fp")) {
-            log("SPECrate2006_fp");
+            // log("SPECrate2006_fp");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -222,7 +225,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECrate2006_fp"
             );
           } else if (Object.keys(payloadRaw).includes("SPECrate2006_int")) {
-            log("SPECrate2006_int");
+            // log("SPECrate2006_int");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -278,7 +281,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECrate2006_int"
             );
           } else if (Object.keys(payloadRaw).includes("SPECrate2017_fp")) {
-            log("specrate2017fp");
+            // log("specrate2017fp");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -337,7 +340,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECrate2017_fp"
             );
           } else if (Object.keys(payloadRaw).includes("SPECrate2017_int")) {
-            log("specrate2017int");
+            // log("specrate2017int");
 
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
@@ -388,7 +391,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECrate2017_int"
             );
           } else if (Object.keys(payloadRaw).includes("SPECspeed2006_fp")) {
-            log("specspeed2006fp");
+            // log("specspeed2006fp");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -458,7 +461,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECspeed2006_fp"
             );
           } else if (Object.keys(payloadRaw).includes("SPECspeed2006_int")) {
-            log("specspeed2006int");
+            // log("specspeed2006int");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -513,7 +516,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECspeed2006_int"
             );
           } else if (Object.keys(payloadRaw).includes("SPECspeed2017_fp")) {
-            log("specspeed2017fp");
+            // log("specspeed2017fp");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -562,7 +565,7 @@ racedayTopic.split(",").forEach((tpic) => {
               "SPECspeed2017_fp"
             );
           } else if (Object.keys(payloadRaw).includes("SPECspeed2017_int")) {
-            log("specspeed2017int");
+            // log("specspeed2017int");
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
@@ -645,12 +648,12 @@ racedayTopic.split(",").forEach((tpic) => {
 //   }, 2000);
 // });
 
-async function fetchIterationObj(url) {
-  // get from DB and send
-  return await axios
-    .get(url)
-    .then((res) => res.data)
-    .catch((ex) => ex);
-}
+// async function fetchIterationObj(url) {
+//   // get from DB and send
+//   return await axios
+//     .get(url)
+//     .then((res) => res.data)
+//     .catch((ex) => ex);
+// }
 
 // httpServer.listen(8080);
