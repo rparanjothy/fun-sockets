@@ -51,7 +51,7 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
 
   currentTopicObj["data"] = incomingPayload;
   currentTopicObj["type"] = lbl;
-  currentTopicObj["upd_ts"] = Date.now();
+  // currentTopicObj["upd_ts"] = Date.now();
 
   const objUpdated = { ...currentTopicObj };
 
@@ -108,7 +108,7 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              peak_mflops: payload.dgemm_tw.peak_mflops,
+              // peak_mflops: payload.dgemm_tw.peak_mflops,
             };
 
             // // fetch by _id = "iteration_name"
@@ -134,7 +134,7 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              Gflops: payload.HPL.Gflops,
+              // Gflops: payload.HPL.Gflops,
             };
             // // fetch by _id = "iteration_name"
             // url = [retrieveURL, payload.test_dimensions.iteration_name].join(
@@ -158,58 +158,58 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECrate2006_fp.base.mean,
-              "_410_bwaves_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._410_bwaves_.base.iterations[0]
-                  .ratio,
-              "_416_gamess_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._416_gamess_.base.iterations[0]
-                  .ratio,
-              "_433_milc_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._433_milc_.base.iterations[0]
-                  .ratio,
-              "_434_zeusmp_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._434_zeusmp_.base.iterations[0]
-                  .ratio,
-              "_435_gromacs_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._435_gromacs_.base.iterations[0]
-                  .ratio,
-              "_436_cactusADM_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._436_cactusADM_.base
-                  .iterations[0].ratio,
-              "_437_leslie3d_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._437_leslie3d_.base
-                  .iterations[0].ratio,
-              "_444_namd_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._444_namd_.base.iterations[0]
-                  .ratio,
-              "_447_dealII_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._447_dealII_.base.iterations[0]
-                  .ratio,
-              "_450_soplex_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._450_soplex_.base.iterations[0]
-                  .ratio,
-              "_453_povray_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._453_povray_.base.iterations[0]
-                  .ratio,
-              "_454_calculix_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._454_calculix_.base
-                  .iterations[0].ratio,
-              "_459_GemsFDTD_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._459_GemsFDTD_.base
-                  .iterations[0].ratio,
-              "_465_tonto_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._465_tonto_.base.iterations[0]
-                  .ratio,
-              "_470_lbm_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._470_lbm_.base.iterations[0]
-                  .ratio,
-              "_481_wrf_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._481_wrf_.base.iterations[0]
-                  .ratio,
-              "_482_sphinx3_.base.iterations0.ratio":
-                payload.SPECrate2006_fp.results._482_sphinx3_.base.iterations[0]
-                  .ratio,
+              // mean: payload.SPECrate2006_fp.base.mean,
+              // "_410_bwaves_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._410_bwaves_.base.iterations[0]
+              //     .ratio,
+              // "_416_gamess_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._416_gamess_.base.iterations[0]
+              //     .ratio,
+              // "_433_milc_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._433_milc_.base.iterations[0]
+              //     .ratio,
+              // "_434_zeusmp_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._434_zeusmp_.base.iterations[0]
+              //     .ratio,
+              // "_435_gromacs_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._435_gromacs_.base.iterations[0]
+              //     .ratio,
+              // "_436_cactusADM_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._436_cactusADM_.base
+              //     .iterations[0].ratio,
+              // "_437_leslie3d_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._437_leslie3d_.base
+              //     .iterations[0].ratio,
+              // "_444_namd_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._444_namd_.base.iterations[0]
+              //     .ratio,
+              // "_447_dealII_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._447_dealII_.base.iterations[0]
+              //     .ratio,
+              // "_450_soplex_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._450_soplex_.base.iterations[0]
+              //     .ratio,
+              // "_453_povray_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._453_povray_.base.iterations[0]
+              //     .ratio,
+              // "_454_calculix_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._454_calculix_.base
+              //     .iterations[0].ratio,
+              // "_459_GemsFDTD_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._459_GemsFDTD_.base
+              //     .iterations[0].ratio,
+              // "_465_tonto_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._465_tonto_.base.iterations[0]
+              //     .ratio,
+              // "_470_lbm_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._470_lbm_.base.iterations[0]
+              //     .ratio,
+              // "_481_wrf_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._481_wrf_.base.iterations[0]
+              //     .ratio,
+              // "_482_sphinx3_.base.iterations0.ratio":
+              //   payload.SPECrate2006_fp.results._482_sphinx3_.base.iterations[0]
+              //     .ratio,
             };
             // url = [retrieveURL, payload.test_dimensions.iteration_name].join(
             //   "/"
@@ -232,43 +232,43 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECrate2006_int.base.mean,
-              "test_400_perlbench_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_400_perlbench_.base
-                  .iterations[0].ratio,
-              "test_401_bzip2_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_401_bzip2_.base
-                  .iterations[0].ratio,
-              "test_403_gcc_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_403_gcc_.base
-                  .iterations[0].ratio,
-              "test_429_mcf_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_429_mcf_.base
-                  .iterations[0].ratio,
-              "test_445_gobmk_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_445_gobmk_.base
-                  .iterations[0].ratio,
-              "test_456_hmmer_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_456_hmmer_.base
-                  .iterations[0].ratio,
-              "test_458_sjeng_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_458_sjeng_.base
-                  .iterations[0].ratio,
-              "test_462_libquantum_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_462_libquantum_.base
-                  .iterations[0].ratio,
-              "test_464_h264ref_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_464_h264ref_.base
-                  .iterations[0].ratio,
-              "test_471_omnetpp_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_471_omnetpp_.base
-                  .iterations[0].ratio,
-              "test_473_astar_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_473_astar_.base
-                  .iterations[0].ratio,
-              "test_483_xalancbmk_.base.iterations0.ratio":
-                payload.SPECrate2006_int.results.test_483_xalancbmk_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECrate2006_int.base.mean,
+              // "test_400_perlbench_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_400_perlbench_.base
+              //     .iterations[0].ratio,
+              // "test_401_bzip2_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_401_bzip2_.base
+              //     .iterations[0].ratio,
+              // "test_403_gcc_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_403_gcc_.base
+              //     .iterations[0].ratio,
+              // "test_429_mcf_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_429_mcf_.base
+              //     .iterations[0].ratio,
+              // "test_445_gobmk_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_445_gobmk_.base
+              //     .iterations[0].ratio,
+              // "test_456_hmmer_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_456_hmmer_.base
+              //     .iterations[0].ratio,
+              // "test_458_sjeng_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_458_sjeng_.base
+              //     .iterations[0].ratio,
+              // "test_462_libquantum_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_462_libquantum_.base
+              //     .iterations[0].ratio,
+              // "test_464_h264ref_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_464_h264ref_.base
+              //     .iterations[0].ratio,
+              // "test_471_omnetpp_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_471_omnetpp_.base
+              //     .iterations[0].ratio,
+              // "test_473_astar_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_473_astar_.base
+              //     .iterations[0].ratio,
+              // "test_483_xalancbmk_.base.iterations0.ratio":
+              //   payload.SPECrate2006_int.results.test_483_xalancbmk_.base
+              //     .iterations[0].ratio,
             };
 
             sync(
@@ -288,46 +288,46 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECrate2017_fp.base.mean,
-              "test_503_bwaves_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_503_bwaves_r_.base
-                  .iterations[0].ratio,
-              "test_507_cactuBSSN_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_507_cactuBSSN_r_.base
-                  .iterations[0].ratio,
-              "test_508_namd_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_508_namd_r_.base
-                  .iterations[0].ratio,
-              "test_510_parest_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_510_parest_r_.base
-                  .iterations[0].ratio,
-              "test_511_povray_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_511_povray_r_.base
-                  .iterations[0].ratio,
-              "test_519_lbm_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_519_lbm_r_.base
-                  .iterations[0].ratio,
-              "test_521_wrf_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_521_wrf_r_.base
-                  .iterations[0].ratio,
-              "test_526_blender_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_526_blender_r_.base
-                  .iterations[0].ratio,
-              "test_527_cam4_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_527_cam4_r_.base
-                  .iterations[0].ratio,
-              "test_538_imagick_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_538_imagick_r_.base
-                  .iterations[0].ratio,
-              "test_544_nab_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_544_nab_r_.base
-                  .iterations[0].ratio,
-              "test_549_fotonik3d_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_549_fotonik3d_r_.base
-                  .iterations[0].ratio,
-              "test_554_roms_r_.base.iterations0.ratio":
-                payload.SPECrate2017_fp.results.test_554_roms_r_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECrate2017_fp.base.mean,
+              // "test_503_bwaves_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_503_bwaves_r_.base
+              //     .iterations[0].ratio,
+              // "test_507_cactuBSSN_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_507_cactuBSSN_r_.base
+              //     .iterations[0].ratio,
+              // "test_508_namd_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_508_namd_r_.base
+              //     .iterations[0].ratio,
+              // "test_510_parest_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_510_parest_r_.base
+              //     .iterations[0].ratio,
+              // "test_511_povray_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_511_povray_r_.base
+              //     .iterations[0].ratio,
+              // "test_519_lbm_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_519_lbm_r_.base
+              //     .iterations[0].ratio,
+              // "test_521_wrf_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_521_wrf_r_.base
+              //     .iterations[0].ratio,
+              // "test_526_blender_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_526_blender_r_.base
+              //     .iterations[0].ratio,
+              // "test_527_cam4_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_527_cam4_r_.base
+              //     .iterations[0].ratio,
+              // "test_538_imagick_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_538_imagick_r_.base
+              //     .iterations[0].ratio,
+              // "test_544_nab_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_544_nab_r_.base
+              //     .iterations[0].ratio,
+              // "test_549_fotonik3d_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_549_fotonik3d_r_.base
+              //     .iterations[0].ratio,
+              // "test_554_roms_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_fp.results.test_554_roms_r_.base
+              //     .iterations[0].ratio,
             };
 
             sync(
@@ -338,8 +338,6 @@ racedayTopic.split(",").forEach((tpic) => {
             );
           } else if (Object.keys(payloadRaw).includes("SPECrate2017_int")) {
             log("specrate2017int");
-            log(Object.keys(payloadRaw));
-            log("-----");
 
             incomingPayload = {
               iteration_guid: payload.test_dimensions.iteration_guid,
@@ -350,37 +348,37 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECrate2017_int.base.mean,
-              "test_500_perlbench_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_500_perlbench_r_.base
-                  .iterations[0].ratio,
-              "test_502_gcc_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_502_gcc_r_.base
-                  .iterations[0].ratio,
-              "test_505_mcf_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_505_mcf_r_.base
-                  .iterations[0].ratio,
-              "test_520_omnetpp_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_520_omnetpp_r_.base
-                  .iterations[0].ratio,
-              "test_523_xalancbmk_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_523_xalancbmk_r_.base
-                  .iterations[0].ratio,
-              "test_525_x264_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_525_x264_r_.base
-                  .iterations[0].ratio,
-              "test_531_deepsjeng_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_531_deepsjeng_r_.base
-                  .iterations[0].ratio,
-              "test_541_leela_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_541_leela_r_.base
-                  .iterations[0].ratio,
-              "test_548_exchange2_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_548_exchange2_r_.base
-                  .iterations[0].ratio,
-              "test_557_xz_r_.base.iterations0.ratio":
-                payload.SPECrate2017_int.results.test_557_xz_r_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECrate2017_int.base.mean,
+              // "test_500_perlbench_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_500_perlbench_r_.base
+              //     .iterations[0].ratio,
+              // "test_502_gcc_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_502_gcc_r_.base
+              //     .iterations[0].ratio,
+              // "test_505_mcf_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_505_mcf_r_.base
+              //     .iterations[0].ratio,
+              // "test_520_omnetpp_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_520_omnetpp_r_.base
+              //     .iterations[0].ratio,
+              // "test_523_xalancbmk_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_523_xalancbmk_r_.base
+              //     .iterations[0].ratio,
+              // "test_525_x264_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_525_x264_r_.base
+              //     .iterations[0].ratio,
+              // "test_531_deepsjeng_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_531_deepsjeng_r_.base
+              //     .iterations[0].ratio,
+              // "test_541_leela_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_541_leela_r_.base
+              //     .iterations[0].ratio,
+              // "test_548_exchange2_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_548_exchange2_r_.base
+              //     .iterations[0].ratio,
+              // "test_557_xz_r_.base.iterations0.ratio":
+              //   payload.SPECrate2017_int.results.test_557_xz_r_.base
+              //     .iterations[0].ratio,
             };
 
             sync(
@@ -400,58 +398,58 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              "SPECspeed2006_fp.base.mean": payload.SPECspeed2006_fp.base.mean,
-              "_410_bwaves_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._410_bwaves_.base.iterations[0]
-                  .ratio,
-              "_416_gamess_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._416_gamess_.base.iterations[0]
-                  .ratio,
-              "_433_milc_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._433_milc_.base.iterations[0]
-                  .ratio,
-              "_434_zeusmp_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._434_zeusmp_.base.iterations[0]
-                  .ratio,
-              "_435_gromacs_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._435_gromacs_.base
-                  .iterations[0].ratio,
-              "_436_cactusADM_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._436_cactusADM_.base
-                  .iterations[0].ratio,
-              "_437_leslie3d_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._437_leslie3d_.base
-                  .iterations[0].ratio,
-              "_444_namd_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._444_namd_.base.iterations[0]
-                  .ratio,
-              "_447_dealII_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._447_dealII_.base.iterations[0]
-                  .ratio,
-              "_450_soplex_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._450_soplex_.base.iterations[0]
-                  .ratio,
-              "_453_povray_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._453_povray_.base.iterations[0]
-                  .ratio,
-              "_454_calculix_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._454_calculix_.base
-                  .iterations[0].ratio,
-              "_459_GemsFDTD_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._459_GemsFDTD_.base
-                  .iterations[0].ratio,
-              "_465_tonto_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._465_tonto_.base.iterations[0]
-                  .ratio,
-              "_470_lbm_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._470_lbm_.base.iterations[0]
-                  .ratio,
-              "_481_wrf_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._481_wrf_.base.iterations[0]
-                  .ratio,
-              "_482_sphinx3_.base.iterations0.ratio":
-                payload.SPECspeed2006_fp.results._482_sphinx3_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECspeed2006_fp.base.mean,
+              // "_410_bwaves_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._410_bwaves_.base.iterations[0]
+              //     .ratio,
+              // "_416_gamess_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._416_gamess_.base.iterations[0]
+              //     .ratio,
+              // "_433_milc_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._433_milc_.base.iterations[0]
+              //     .ratio,
+              // "_434_zeusmp_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._434_zeusmp_.base.iterations[0]
+              //     .ratio,
+              // "_435_gromacs_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._435_gromacs_.base
+              //     .iterations[0].ratio,
+              // "_436_cactusADM_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._436_cactusADM_.base
+              //     .iterations[0].ratio,
+              // "_437_leslie3d_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._437_leslie3d_.base
+              //     .iterations[0].ratio,
+              // "_444_namd_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._444_namd_.base.iterations[0]
+              //     .ratio,
+              // "_447_dealII_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._447_dealII_.base.iterations[0]
+              //     .ratio,
+              // "_450_soplex_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._450_soplex_.base.iterations[0]
+              //     .ratio,
+              // "_453_povray_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._453_povray_.base.iterations[0]
+              //     .ratio,
+              // "_454_calculix_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._454_calculix_.base
+              //     .iterations[0].ratio,
+              // "_459_GemsFDTD_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._459_GemsFDTD_.base
+              //     .iterations[0].ratio,
+              // "_465_tonto_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._465_tonto_.base.iterations[0]
+              //     .ratio,
+              // "_470_lbm_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._470_lbm_.base.iterations[0]
+              //     .ratio,
+              // "_481_wrf_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._481_wrf_.base.iterations[0]
+              //     .ratio,
+              // "_482_sphinx3_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_fp.results._482_sphinx3_.base
+              //     .iterations[0].ratio,
             };
             sync(
               payload.test_dimensions.iteration_guid,
@@ -470,43 +468,43 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECspeed2006_int.base.mean,
-              "test_400_perlbench_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_400_perlbench_.base
-                  .iterations[0].ratio,
-              "test_401_bzip2_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_401_bzip2_.base
-                  .iterations[0].ratio,
-              "test_403_gcc_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_403_gcc_.base
-                  .iterations[0].ratio,
-              "test_429_mcf_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_429_mcf_.base
-                  .iterations[0].ratio,
-              "test_445_gobmk_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_445_gobmk_.base
-                  .iterations[0].ratio,
-              "test_456_hmmer_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_456_hmmer_.base
-                  .iterations[0].ratio,
-              "test_458_sjeng_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_458_sjeng_.base
-                  .iterations[0].ratio,
-              "test_462_libquantum_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_462_libquantum_.base
-                  .iterations[0].ratio,
-              "test_464_h264ref_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_464_h264ref_.base
-                  .iterations[0].ratio,
-              "test_471_omnetpp_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_471_omnetpp_.base
-                  .iterations[0].ratio,
-              "test_473_astar_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_473_astar_.base
-                  .iterations[0].ratio,
-              "test_483_xalancbmk_.base.iterations0.ratio":
-                payload.SPECspeed2006_int.results.test_483_xalancbmk_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECspeed2006_int.base.mean,
+              // "test_400_perlbench_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_400_perlbench_.base
+              //     .iterations[0].ratio,
+              // "test_401_bzip2_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_401_bzip2_.base
+              //     .iterations[0].ratio,
+              // "test_403_gcc_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_403_gcc_.base
+              //     .iterations[0].ratio,
+              // "test_429_mcf_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_429_mcf_.base
+              //     .iterations[0].ratio,
+              // "test_445_gobmk_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_445_gobmk_.base
+              //     .iterations[0].ratio,
+              // "test_456_hmmer_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_456_hmmer_.base
+              //     .iterations[0].ratio,
+              // "test_458_sjeng_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_458_sjeng_.base
+              //     .iterations[0].ratio,
+              // "test_462_libquantum_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_462_libquantum_.base
+              //     .iterations[0].ratio,
+              // "test_464_h264ref_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_464_h264ref_.base
+              //     .iterations[0].ratio,
+              // "test_471_omnetpp_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_471_omnetpp_.base
+              //     .iterations[0].ratio,
+              // "test_473_astar_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_473_astar_.base
+              //     .iterations[0].ratio,
+              // "test_483_xalancbmk_.base.iterations0.ratio":
+              //   payload.SPECspeed2006_int.results.test_483_xalancbmk_.base
+              //     .iterations[0].ratio,
             };
             sync(
               payload.test_dimensions.iteration_guid,
@@ -525,37 +523,37 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECspeed2017_fp.base.mean,
-              "test_603_bwaves_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_603_bwaves_s_.base
-                  .iterations[0].ratio,
-              "test_607_cactuBSSN_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_607_cactuBSSN_s_.base
-                  .iterations[0].ratio,
-              "test_619_lbm_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_619_lbm_s_.base
-                  .iterations[0].ratio,
-              "test_621_wrf_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_621_wrf_s_.base
-                  .iterations[0].ratio,
-              "test_627_cam4_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_627_cam4_s_.base
-                  .iterations[0].ratio,
-              "test_628_pop2_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_628_pop2_s_.base
-                  .iterations[0].ratio,
-              "test_638_imagick_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_638_imagick_s_.base
-                  .iterations[0].ratio,
-              "test_644_nab_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_644_nab_s_.base
-                  .iterations[0].ratio,
-              "test_649_fotonik3d_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_649_fotonik3d_s_.base
-                  .iterations[0].ratio,
-              "test_654_roms_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_fp.results.test_654_roms_s_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECspeed2017_fp.base.mean,
+              // "test_603_bwaves_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_603_bwaves_s_.base
+              //     .iterations[0].ratio,
+              // "test_607_cactuBSSN_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_607_cactuBSSN_s_.base
+              //     .iterations[0].ratio,
+              // "test_619_lbm_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_619_lbm_s_.base
+              //     .iterations[0].ratio,
+              // "test_621_wrf_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_621_wrf_s_.base
+              //     .iterations[0].ratio,
+              // "test_627_cam4_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_627_cam4_s_.base
+              //     .iterations[0].ratio,
+              // "test_628_pop2_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_628_pop2_s_.base
+              //     .iterations[0].ratio,
+              // "test_638_imagick_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_638_imagick_s_.base
+              //     .iterations[0].ratio,
+              // "test_644_nab_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_644_nab_s_.base
+              //     .iterations[0].ratio,
+              // "test_649_fotonik3d_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_649_fotonik3d_s_.base
+              //     .iterations[0].ratio,
+              // "test_654_roms_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_fp.results.test_654_roms_s_.base
+              //     .iterations[0].ratio,
             };
             sync(
               payload.test_dimensions.iteration_guid,
@@ -574,37 +572,37 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[0].iod.serial_number,
               s1_serial_number:
                 payload.sut_dimensions.socket[1].iod.serial_number,
-              mean: payload.SPECspeed2017_int.base.mean,
-              "test_600_perlbench_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_600_perlbench_s_.base
-                  .iterations[0].ratio,
-              "test_602_gcc_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_602_gcc_s_.base
-                  .iterations[0].ratio,
-              "test_605_mcf_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_605_mcf_s_.base
-                  .iterations[0].ratio,
-              "test_620_omnetpp_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_620_omnetpp_s_.base
-                  .iterations[0].ratio,
-              "test_623_xalancbmk_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_623_xalancbmk_s_.base
-                  .iterations[0].ratio,
-              "test_625_x264_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_625_x264_s_.base
-                  .iterations[0].ratio,
-              "test_631_deepsjeng_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_631_deepsjeng_s_.base
-                  .iterations[0].ratio,
-              "test_641_leela_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_641_leela_s_.base
-                  .iterations[0].ratio,
-              "test_648_exchange2_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_648_exchange2_s_.base
-                  .iterations[0].ratio,
-              "test_657_xz_s_.base.iterations0.ratio":
-                payload.SPECspeed2017_int.results.test_657_xz_s_.base
-                  .iterations[0].ratio,
+              // mean: payload.SPECspeed2017_int.base.mean,
+              // "test_600_perlbench_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_600_perlbench_s_.base
+              //     .iterations[0].ratio,
+              // "test_602_gcc_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_602_gcc_s_.base
+              //     .iterations[0].ratio,
+              // "test_605_mcf_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_605_mcf_s_.base
+              //     .iterations[0].ratio,
+              // "test_620_omnetpp_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_620_omnetpp_s_.base
+              //     .iterations[0].ratio,
+              // "test_623_xalancbmk_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_623_xalancbmk_s_.base
+              //     .iterations[0].ratio,
+              // "test_625_x264_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_625_x264_s_.base
+              //     .iterations[0].ratio,
+              // "test_631_deepsjeng_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_631_deepsjeng_s_.base
+              //     .iterations[0].ratio,
+              // "test_641_leela_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_641_leela_s_.base
+              //     .iterations[0].ratio,
+              // "test_648_exchange2_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_648_exchange2_s_.base
+              //     .iterations[0].ratio,
+              // "test_657_xz_s_.base.iterations0.ratio":
+              //   payload.SPECspeed2017_int.results.test_657_xz_s_.base
+              //     .iterations[0].ratio,
             };
             sync(
               payload.test_dimensions.iteration_guid,

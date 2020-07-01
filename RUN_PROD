@@ -26,12 +26,12 @@ docker container run -d --restart unless-stopped \
 
 
 docker container run -it --rm \
- --name pdat-dashboard \
+ --name pdat-dashboard-ram \
  -e RACEDAY_TOPIC=prod.test.dgemm-tw.cooked,prod.test.hpl.cooked,prod.testseries.specrate2006fp.cooked,prod.testseries.specrate2006int.cooked,prod.testseries.specrate2017fp.cooked,prod.testseries.specrate2017int.cooked,prod.testseries.specspeed2006fp.cooked,prod.testseries.specspeed2006int.cooked,prod.testseries.specspeed2017fp.cooked,prod.testseries.specspeed2017int.cooked \
  -e UPSERT_URL=http://atlraceprd05:30000/teams/create \
  -e RETRIEVE_URL=http://atlraceprd05:30000/teams/retrieve \
  -e FETCH_URL=http://atlraceprd05:30000/teams/listinfo \
  -e KAFKA_BROKERS=atlraceprd01.amd.com:9092,atlraceprd02.amd.com:9092,atlraceprd03.amd.com:9092 \
  -e FROMBEGIN=1 \
- -e APPID=pdat-dashboard \
+ -e APPID=pdat-dashboard-ram \
  sppogit.amd.com:5005/rparanjo/guid-ticker-api:dashboard
