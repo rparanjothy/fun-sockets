@@ -14,6 +14,7 @@ docker container run -it --rm \
  -e RACEDAY_TOPIC=staging.unstructured.binary.cooked,staging.unstructured.csv.cooked,staging.unstructured.text.cooked,staging.unstructured.logs.cooked,staging.unstructured.json.cooked,staging.timeseries.merged-daqlog.raw \
  -e UPSERT_URL=http://raceday-staging.sppo:30000/teams/create \
  -e FETCH_URL=http://raceday-staging.sppo:30000/teams/listinfo \
+ -e RETRIEVE_URL=http://raceday-staging.sppo:30000/teams/retrieve \
  -e KAFKA_BROKERS=raceday-staging.sppo:9092 \
  sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
 
@@ -24,6 +25,8 @@ RACEDAY_TOPIC = staging.timeseries.daqlog.raw
 UPSERT_URL = http://raceday-staging.sppo:30000/teams/upsert/
 
 FETCH_URL = http://raceday-staging.sppo:30000/teams/listinfo
+
+RETRIEVE_URL="http://raceday-staging.sppo:30000/teams/retrieve"
 
 KAFKA_BROKERS = raceday-staging.sppo:9092
 
