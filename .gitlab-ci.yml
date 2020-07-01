@@ -7,6 +7,7 @@ variables:
   DOCKER_IMAGE_NAME: "rparanjo/guid-ticker-api"
   DOCKER_IMAGE_TAG: "${CI_REGISTRY}/${DOCKER_IMAGE_NAME}:${CI_BUILD_REF}"
   DOCKER_MASTER_TAG: "${CI_REGISTRY}/${DOCKER_IMAGE_NAME}:latest"
+  DOCKER_DASHBOARD_TAG: "${CI_REGISTRY}/${DOCKER_IMAGE_NAME}:dashboard"
   # next two are for unsecure docker repo access
   DOCKER_HOST: "tcp://builddocker:2375"
   DOCKER_TLS_CERTDIR: ""
@@ -35,6 +36,22 @@ createDockerImage:
 
   only:
     - develop
+
+  createDockerImageDashboard:
+    stage: package
+    image: docker:19.03.5
+    tags:
+      - docker
+      - linux
+    script:
+      - pwd
+      # - docker info
+      - docker build -t ${DOCKER_DASHBOARD_TAG} .
+      - docker images
+      - docker push ${DOCKER_DASHBOARD_TAG}
+
+    only:
+      - dashboard
 
 createDockerImageProd:
   image: docker:19.03.5
