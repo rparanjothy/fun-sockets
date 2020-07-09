@@ -13,19 +13,10 @@ const racedayTopic =
 const appID = process.env.APPID || "pdat-summary";
 
 const upsertURL =
-  process.env.UPSERT_URL || "http://raceday-staging.sppo:30000/teams/create";
+  process.env.UPSERT_URL ||
+  "http://raceday-staging.sppo:30000/teams/createEvent";
 
 const frmBeginningFlag = process.env.FROMBEGIN || 1;
-
-console.log(frmBeginningFlag);
-console.log(Boolean(parseInt(frmBeginningFlag)));
-
-const retrieveURL =
-  process.env.RETRIEVE_URL ||
-  "http://raceday-staging.sppo:30000/teams/retrieve";
-
-const fetchURL =
-  process.env.FETCH_URL || "http://raceday-staging.sppo:30000/teams/listinfo";
 
 const kafkaBrokers = process.env.KAFKA_BROKERS || "raceday-staging.sppo:9092";
 
@@ -39,13 +30,13 @@ const kafkaClient = new Kafka({
 const rdConsumer = kafkaClient.consumer({ groupId: appID });
 
 const sync = (iterGuid, incomingPayload, tpic, lbl) => {
-  incomingPayload["ld_ts"] = new Date();
-  incomingPayload["upd_ts"] = Date.now();
-
+  // python Mongo API will cast these to dates.
+  const sync_ts = Date.now();
   const currentTopicObj = {};
-
   currentTopicObj["data"] = incomingPayload;
   currentTopicObj["type"] = lbl;
+  currentTopicObj["ld_ts"] = sync_ts;
+  currentTopicObj["upd_ts"] = sync_ts;
 
   const objUpdated = { ...currentTopicObj };
 
@@ -56,13 +47,13 @@ const sync = (iterGuid, incomingPayload, tpic, lbl) => {
       .post(`${upsertURL}/${iterGuid}`, objUpdated)
       .then((res) =>
         log(
-          `[SUCCESS] >>> GUID: ${iterGuid} >>> topic: ${tpic} >>> ${new Date()}`
+          `[SUCCESS] >>> GUID: ${iterGuid} >>> topic: ${tpic} >>> UTC: ${new Date().toISOString()}`
         )
       )
       .catch((ex) => {
         const exRet = ex.response.data;
         log(
-          `[API ERROR] >>> GUID: ${exRet._id} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
+          `[API ERROR] >>> GUID: ${iterGuid} >>> msg: ${exRet.msg} >>> code: ${exRet.err_code}`
         );
       });
 };
@@ -78,7 +69,8 @@ racedayTopic.split(",").forEach((tpic) => {
       log(`[INFO] >>> ${tpic}: subscribe OK`);
       rdConsumer.run({
         eachMessage: async ({ topic, partition, message }) => {
-          const kafkaMsgtime = new Date(parseInt(message.timestamp));
+          const kafkaMsgtime = parseInt(message.timestamp);
+
           const payloadRaw = JSON.parse(message.value.toString());
 
           const { sut_dimensions } = payloadRaw;
@@ -94,10 +86,6 @@ racedayTopic.split(",").forEach((tpic) => {
             sut_dimensions: sut_dimensionsFixed,
           };
 
-          // log(tpic);
-          // log(payloadRaw);
-          // log(Object.keys(payloadRaw));
-
           if (Object.keys(payloadRaw).includes("dgemm_tw")) {
             // log("DGEMM");
             incomingPayload = {
@@ -112,11 +100,6 @@ racedayTopic.split(",").forEach((tpic) => {
                 payload.sut_dimensions.socket[1].iod.serial_number,
               // peak_mflops: payload.dgemm_tw.peak_mflops,
             };
-
-            // // fetch by _id = "iteration_name"
-            // url = [retrieveURL, payload.test_dimensions.iteration_name].join(
-            //   "/"
-            // );
 
             sync(
               payload.test_dimensions.iteration_guid,

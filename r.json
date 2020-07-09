@@ -1,0 +1,29 @@
+{
+  "iteration_guid": payload.test_dimensions.iteration_guid,
+  "iteration_name": payload.test_dimensions.iteration_name,
+  "test_name": payload.test_dimensions.test_name,
+  "bios_name": payload.system_configuration.bios.bios_name,
+  "s0_serial_number": payload.sut_dimensions.socket[0].iod.serial_number,
+  "s1_serial_number": payload.sut_dimensions.socket[1].iod.serial_number,
+  "mean": payload.SPECrate2017_int.base.mean,
+  "test_500_perlbench_r_.base.iterations0.ratio": payload.SPECrate2017_int
+    .results.test_500_perlbench_r_.base.iterations[0].ratio,
+  "test_502_gcc_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_502_gcc_r_.base.iterations[0].ratio,
+  "test_505_mcf_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_505_mcf_r_.base.iterations[0].ratio,
+  "test_520_omnetpp_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_520_omnetpp_r_.base.iterations[0].ratio,
+  "test_523_xalancbmk_r_.base.iterations0.ratio": payload.SPECrate2017_int
+    .results.test_523_xalancbmk_r_.base.iterations[0].ratio,
+  "test_525_x264_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_525_x264_r_.base.iterations[0].ratio,
+  "test_531_deepsjeng_r_.base.iterations0.ratio": payload.SPECrate2017_int
+    .results.test_531_deepsjeng_r_.base.iterations[0].ratio,
+  "test_541_leela_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_541_leela_r_.base.iterations[0].ratio,
+  "test_548_exchange2_r_.base.iterations0.ratio": payload.SPECrate2017_int
+    .results.test_548_exchange2_r_.base.iterations[0].ratio,
+  "test_557_xz_r_.base.iterations0.ratio": payload.SPECrate2017_int.results
+    .test_557_xz_r_.base.iterations[0].ratio
+}

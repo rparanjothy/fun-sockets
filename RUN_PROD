@@ -4,8 +4,7 @@ docker container run -d --restart unless-stopped \
  --name guid-chaser \
  -p9001:8080 \
  -e RACEDAY_TOPIC=prod.unstructured.binary.cooked,prod.unstructured.csv.cooked,prod.unstructured.text.cooked,prod.unstructured.logs.cooked,prod.unstructured.json.cooked,prod.timeseries.merged-daqlog.raw \
- -e UPSERT_URL=http://atlraceprd05:30000/teams/create \
- -e FETCH_URL=http://atlraceprd05:30000/teams/listinfo \
+ -e UPSERT_URL=http://atlraceprd05:30000/teams/createEvent \
  -e KAFKA_BROKERS=atlraceprd01.amd.com:9092,atlraceprd02.amd.com:9092,atlraceprd03.amd.com:9092 \
  sppogit.amd.com:5005/rparanjo/guid-ticker-api:latest
 
@@ -16,21 +15,17 @@ docker container run -d --restart unless-stopped \
 docker container run -d --restart unless-stopped \
  --name pdat-dashboard \
  -e RACEDAY_TOPIC=prod.unstructured.binary.cooked,prod.unstructured.csv.cooked,prod.unstructured.text.cooked,prod.unstructured.logs.cooked,prod.unstructured.json.cooked,prod.timeseries.merged-daqlog.raw \
- -e UPSERT_URL=http://atlraceprd05:30000/teams/create \
- -e RETRIEVE_URL=http://atlraceprd05:30000/teams/retrieve \
- -e FETCH_URL=http://atlraceprd05:30000/teams/listinfo \
+ -e UPSERT_URL=http://atlraceprd05:30000/teams/createEvent \
  -e KAFKA_BROKERS=atlraceprd01.amd.com:9092,atlraceprd02.amd.com:9092,atlraceprd03.amd.com:9092 \
  -e FROMBEGIN=1 \
  -e APPID=pdat-dashboard \
  sppogit.amd.com:5005/rparanjo/guid-ticker-api:dashboard
 
 
-docker container run -it --rm \
+docker container run -d --restart unless-stopped \
  --name pdat-dashboard-ram \
  -e RACEDAY_TOPIC=prod.test.dgemm-tw.cooked,prod.test.hpl.cooked,prod.testseries.specrate2006fp.cooked,prod.testseries.specrate2006int.cooked,prod.testseries.specrate2017fp.cooked,prod.testseries.specrate2017int.cooked,prod.testseries.specspeed2006fp.cooked,prod.testseries.specspeed2006int.cooked,prod.testseries.specspeed2017fp.cooked,prod.testseries.specspeed2017int.cooked \
- -e UPSERT_URL=http://atlraceprd05:30000/teams/create \
- -e RETRIEVE_URL=http://atlraceprd05:30000/teams/retrieve \
- -e FETCH_URL=http://atlraceprd05:30000/teams/listinfo \
+ -e UPSERT_URL=http://atlraceprd05:30001/teams/createEvent \
  -e KAFKA_BROKERS=atlraceprd01.amd.com:9092,atlraceprd02.amd.com:9092,atlraceprd03.amd.com:9092 \
  -e FROMBEGIN=1 \
  -e APPID=pdat-dashboard-ram \
