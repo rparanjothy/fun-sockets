@@ -4,8 +4,6 @@
 
 const log = (m) => console.log(m);
 
-const error = (m) => console.error(m);
-
 const axios = require("axios");
 
 const racedayTopic =
@@ -41,28 +39,26 @@ const kafkaClient = new Kafka({
 const rdConsumer = kafkaClient.consumer({ groupId: appID });
 
 const sync = (iterGuid, incomingPayload, tpic, lbl) => {
-  // const obj = fetchIterationObj(url);
-
+  incomingPayload["ld_ts"] = new Date();
   incomingPayload["upd_ts"] = Date.now();
 
   const currentTopicObj = {};
 
-  // log(incomingPayload);
-
   currentTopicObj["data"] = incomingPayload;
   currentTopicObj["type"] = lbl;
-  // currentTopicObj["upd_ts"] = Date.now();
 
   const objUpdated = { ...currentTopicObj };
-
-  // log(objUpdated);
 
   !iterGuid && log(`[ERROR] >>> GUID: ${iterGuid} >>> topic: ${tpic} `);
 
   iterGuid &&
     axios
       .post(`${upsertURL}/${iterGuid}`, objUpdated)
-      .then((res) => log(`[SUCCESS] >>> GUID: ${iterGuid} >>> topic: ${tpic} `))
+      .then((res) =>
+        log(
+          `[SUCCESS] >>> GUID: ${iterGuid} >>> topic: ${tpic} >>> ${new Date()}`
+        )
+      )
       .catch((ex) => {
         const exRet = ex.response.data;
         log(
@@ -82,7 +78,9 @@ racedayTopic.split(",").forEach((tpic) => {
       log(`[INFO] >>> ${tpic}: subscribe OK`);
       rdConsumer.run({
         eachMessage: async ({ topic, partition, message }) => {
+          const kafkaMsgtime = new Date(parseInt(message.timestamp));
           const payloadRaw = JSON.parse(message.value.toString());
+
           const { sut_dimensions } = payloadRaw;
 
           // default s1
@@ -103,6 +101,7 @@ racedayTopic.split(",").forEach((tpic) => {
           if (Object.keys(payloadRaw).includes("dgemm_tw")) {
             // log("DGEMM");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -129,6 +128,8 @@ racedayTopic.split(",").forEach((tpic) => {
             // log("hpl");
 
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -153,6 +154,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECrate2006_fp")) {
             // log("SPECrate2006_fp");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -227,6 +230,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECrate2006_int")) {
             // log("SPECrate2006_int");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -283,6 +288,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECrate2017_fp")) {
             // log("specrate2017fp");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -343,6 +350,8 @@ racedayTopic.split(",").forEach((tpic) => {
             // log("specrate2017int");
 
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -393,6 +402,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECspeed2006_fp")) {
             // log("specspeed2006fp");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -463,6 +474,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECspeed2006_int")) {
             // log("specspeed2006int");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -518,6 +531,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECspeed2017_fp")) {
             // log("specspeed2017fp");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -567,6 +582,8 @@ racedayTopic.split(",").forEach((tpic) => {
           } else if (Object.keys(payloadRaw).includes("SPECspeed2017_int")) {
             // log("specspeed2017int");
             incomingPayload = {
+              msg_ts: kafkaMsgtime,
+
               iteration_guid: payload.test_dimensions.iteration_guid,
               iteration_name: payload.test_dimensions.iteration_name,
               test_name: payload.test_dimensions.test_name,
@@ -619,41 +636,3 @@ racedayTopic.split(",").forEach((tpic) => {
     })
     .catch((e) => log(`Error: ${e} - ${racedayTopic}`));
 });
-
-//  Since this is a pure consumer, we don't want the W/S overhead.
-// // wrap the websocker server on top of http server
-
-// const http = require("http");
-
-// const webSocket = require("websocket");
-
-// get a http server instance
-// const httpServer = http.createServer();
-
-// const webSocketServer = new webSocket.server({ httpServer: httpServer });
-
-// webSocketServer.on("request", (r) => {
-//   const conn = r.accept();
-//   // Now broadcast ecry 5 sec
-//   setInterval(() => {
-//     fetchGuids()
-//       .then((latest10Guids) => {
-//         conn.send(JSON.stringify(latest10Guids), () => {});
-//       })
-//       .catch((ex) =>
-//         conn.send(
-//           JSON.stringify({ msg: `Error Fetching from Raceday - ${ex}` })
-//         )
-//       );
-//   }, 2000);
-// });
-
-// async function fetchIterationObj(url) {
-//   // get from DB and send
-//   return await axios
-//     .get(url)
-//     .then((res) => res.data)
-//     .catch((ex) => ex);
-// }
-
-// httpServer.listen(8080);
